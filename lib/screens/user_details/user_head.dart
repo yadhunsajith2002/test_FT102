@@ -27,6 +27,7 @@ class UserHead extends StatelessWidget {
                 SizedBox(height: 15),
               ],
             ),
+            SizedBox(height: 15),
             Text("Profile", style: s6),
             SizedBox(height: height(context, 0.025)),
             Text("Set Up your profile", style: s6),

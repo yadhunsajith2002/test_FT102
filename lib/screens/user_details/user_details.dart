@@ -32,26 +32,26 @@ class _UserDetailState extends State<UserDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: FutureBuilder(
-          future: fetchUserDetails(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: green,
-                ),
-              );
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text('Error: ${snapshot.error}'),
-              );
-            } else {
-              final DateFormat formatter = DateFormat('yyyy-MM-dd');
-              final today = DateTime.now();
-              final date = formatter.format(ctr.userModel.data?.dob ?? today);
+      body: FutureBuilder(
+        future: fetchUserDetails(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(
+                color: green,
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          } else {
+            final DateFormat formatter = DateFormat('yyyy-MM-dd');
+            final today = DateTime.now();
+            final date = formatter.format(ctr.userModel.data?.dob ?? today);
 
-              return SingleChildScrollView(
+            return SafeArea(
+              child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -86,10 +86,10 @@ class _UserDetailState extends State<UserDetail> {
                     ),
                   ],
                 ),
-              );
-            }
-          },
-        ),
+              ),
+            );
+          }
+        },
       ),
     );
   }

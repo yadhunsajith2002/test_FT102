@@ -110,6 +110,10 @@ class RegisterController extends GetxController {
         Get.to(const Login());
         print('Registration successful');
       } else {
+        Get.showSnackbar(GetSnackBar(
+          message:
+              'Registration failed with status code: ${response.statusCode}',
+        ));
         print('Registration failed with status code: ${response.statusCode}');
       }
     } catch (e) {
