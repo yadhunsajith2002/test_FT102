@@ -74,6 +74,11 @@ class RegisterController extends GetxController {
   final RxBool isRegistering = false.obs;
 
   Future<void> registerwithEmail() async {
+    if (selectedImage.value == null) {
+      // Show snackbar if no image is selected
+      Get.snackbar("Message", 'Please Upload An Image');
+      return;
+    }
     try {
       isRegistering(true);
       var url = Uri.parse(
@@ -100,21 +105,24 @@ class RegisterController extends GetxController {
       var response = await request.send();
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        Get.showSnackbar(const GetSnackBar(
+        Get.snackbar(
           duration: Duration(seconds: 2),
-          message: "Registration Succesful",
+          "Message",
+          'Registration Succesfull',
+          colorText: Colors.white,
           backgroundColor: green,
-          isDismissible: true,
-          barBlur: 5,
-        ));
+        );
         Get.to(const Login());
         print('Registration successful');
       } else {
-        Get.showSnackbar(GetSnackBar(
-          duration: const Duration(seconds: 2),
-          message:
-              'Registration failed with status code: ${response.statusCode}',
-        ));
+        Get.snackbar(
+          duration: Duration(seconds: 2),
+          "Message",
+          'Registration failed ',
+          colorText: Colors.white,
+          backgroundColor: green,
+        );
+
         print('Registration failed with status code: ${response.statusCode}');
       }
     } catch (e) {

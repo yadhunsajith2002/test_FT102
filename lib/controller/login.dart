@@ -39,24 +39,27 @@ class LoginController with ChangeNotifier {
 
         ApiServices.setToken(authToken);
         print(ApiServices.getToken());
-        Get.showSnackbar(const GetSnackBar(
+
+        Get.snackbar(
           duration: Duration(seconds: 2),
-          message: "Logged in Succesfully",
-          backgroundColor: green,
-          isDismissible: true,
-          barBlur: 5,
-        ));
+          "Message",
+          "Logged in Succesfully",
+          colorText: Colors.white,
+          backgroundColor: Colors.lightBlue,
+        );
+
         print("Token: ${authToken}");
 
         Get.to(() => const UserDetail());
       } else {
-        Get.showSnackbar(const GetSnackBar(
+        Get.snackbar(
           duration: Duration(seconds: 2),
-          message: "Invalid Credentials",
+          "Message",
+          "Invalid Credentials",
+          colorText: Colors.white,
           backgroundColor: green,
-          isDismissible: true,
-          barBlur: 5,
-        ));
+        );
+
         print('Login failed with status code: ${response.statusCode}');
       }
     } catch (e) {
