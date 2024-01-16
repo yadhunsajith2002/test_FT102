@@ -111,6 +111,7 @@ class RegisterController extends GetxController {
         print('Registration successful');
       } else {
         Get.showSnackbar(GetSnackBar(
+          duration: const Duration(seconds: 2),
           message:
               'Registration failed with status code: ${response.statusCode}',
         ));
